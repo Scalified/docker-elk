@@ -6,7 +6,7 @@
 
 ## Description
 
-This repository is used for building a [**Docker**](https://www.docker.com) image containing [*ELK Stack**](https://www.elastic.co/elk-stack)
+This repository is used for building a [**Docker**](https://www.docker.com) image containing [**ELK Stack**](https://www.elastic.co/elk-stack)
 
 ### ELK
 
@@ -48,7 +48,7 @@ ELK consists of three independent products:
 
 #### JBoss Logger Configuration Example
 
-```
+```xml
 <custom-handler name="SYSLOG" class="org.jboss.logmanager.handlers.SyslogHandler" module="org.jboss.logmanager">
 	<formatter>
 		<pattern-formatter pattern="%-5p %s%E%n"/>
@@ -86,5 +86,5 @@ ELK consists of three independent products:
 
 * [Scalified](http://www.scalified.com)
 * [Scalified Official Facebook Page](https://www.facebook.com/scalified)
-* <a href="mailto:info@scalified.com?subject=[Alpine Supervisor Docker Image]: Proposals And Suggestions">Scalified Support</a>
+* <a href="mailto:info@scalified.com?subject=[ELK Stack Docker Image]: Proposals And Suggestions">Scalified Support</a>
 
