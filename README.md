@@ -58,6 +58,7 @@ ELK consists of three independent products:
 		<property name="facility" value="SYSLOGD"/>
 		<property name="serverHostname" value="elk"/>
 		<property name="port" value="4560"/>
+		<property name="protocol" value="TCP"/>
 		<property name="hostname" value="dev"/>
 		<property name="syslogType" value="RFC5424"/>
 	</properties>
