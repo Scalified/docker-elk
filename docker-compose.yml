@@ -34,8 +34,8 @@ services:
   kibana:
     image: kibana
     environment:
-      - VIRTUAL_HOST=${TEAMCITY_SERVER_VIRTUAL_HOST}
-      - VIRTUAL_PORT=${TEAMCITY_SERVER_VIRTUAL_PORT}
+      - VIRTUAL_HOST=${KIBANA_VIRTUAL_HOST}
+      - VIRTUAL_PORT=${KIBANA_VIRTUAL_PORT}
     volumes:
       - ./kibana/kibana.yml:/etc/kibana/kibana.yml:ro
     networks:
