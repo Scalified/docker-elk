@@ -28,10 +28,6 @@ services:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - elk
-    deploy:
-      resources:
-        limits:
-          cpus: '0.1'
 
   logstash:
     image: logstash
@@ -46,11 +42,7 @@ services:
       - elk
     depends_on:
       - elasticsearch
-    deploy:
-      resources:
-        limits:
-          cpus: '0.1'
-
+      
   kibana:
     image: kibana
     environment:
@@ -64,7 +56,3 @@ services:
       - bridge
     depends_on:
       - elasticsearch
-    deploy:
-      resources:
-        limits:
-          cpus: '0.1'
