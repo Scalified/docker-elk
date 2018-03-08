@@ -9,7 +9,6 @@ networks:
       name: bridge
 
 services:
-
   elasticsearch:
     image: elasticsearch
     volumes:
