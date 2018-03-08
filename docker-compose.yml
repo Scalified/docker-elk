@@ -8,38 +8,63 @@ networks:
     external:
       name: bridge
 
+configs:
+  elasticearch_config:
+    file: ./elasticsearch/elasticsearch.yml
+  logstash_config:
+    file: ./logstash/logstash.yml
+  logstash_pipeline_config:
+    file: ./logstash/conf.d/logstash.conf
+  kibana_config:
+    file: ./kibana/kibana.yml
+
 services:
   elasticsearch:
     image: elasticsearch
-    volumes:
-      - ./elasticsearch/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml:ro
+    configs:
+      - source: elasticearch_config
+        target: /etc/elasticsearch/elasticsearch.yml
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - elk
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
 
   logstash:
     image: logstash
-    volumes:
-      - ./logstash/logstash.yml:/etc/logstash/logstash.yml:ro
-      - ./logstash/conf.d/logstash.conf:/etc/logstash/conf.d:ro
+    configs:
+      - source: logstash_config
+        target: /etc/logstash/logstash.yml
+      - source: logstash_pipeline_config
+        target: /etc/logstash/conf.d/logstash.conf
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - elk
     depends_on:
       - elasticsearch
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
 
   kibana:
     image: kibana
     environment:
       - VIRTUAL_HOST=${KIBANA_VIRTUAL_HOST}
       - VIRTUAL_PORT=${KIBANA_VIRTUAL_PORT}
-    volumes:
-      - ./kibana/kibana.yml:/etc/kibana/kibana.yml:ro
+    configs:
+      - source: kibana_config
+        target: /etc/kibana/kibana.yml
     networks:
       - elk
       - bridge
     depends_on:
       - elasticsearch
-
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
