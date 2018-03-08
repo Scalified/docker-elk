@@ -13,8 +13,6 @@ configs:
     file: ./elasticsearch/elasticsearch.yml
   logstash_config:
     file: ./logstash/logstash.yml
-  logstash_pipeline_config:
-    file: ./logstash/conf.d/logstash.conf
   kibana_config:
     file: ./kibana/kibana.yml
 
@@ -25,19 +23,20 @@ services:
       - source: elasticearch_config
         target: /etc/elasticsearch/elasticsearch.yml
     environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ES_JAVA_OPTS: "-Xmx2048m -Xms256m"
     networks:
       - elk
 
   logstash:
-    image: logstash:alpine
+    image: logstash
     configs:
       - source: logstash_config
         target: /etc/logstash/logstash.yml
-      - source: logstash_pipeline_config
-        target: /etc/logstash/conf.d/logstash.conf
+    volumes:
+      - ./logstash/conf.d:/etc/logstash/conf.d:ro
+    command: ["-f", "/etc/logstash/conf.d/logstash.conf"]
     environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      LS_JAVA_OPTS: "-Xmx2048m -Xms256m"
     networks:
       - elk
     depends_on:
