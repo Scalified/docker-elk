@@ -20,27 +20,23 @@ configs:
 
 services:
   elasticsearch:
-    image: elasticsearch:alpine
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTICSEARCH_VERSION}
     configs:
       - source: elasticearch_config
         target: /etc/elasticsearch/elasticsearch.yml
-    environment:
-      ES_JAVA_OPTS: "-Xmx2048m -Xms256m"
     networks:
       - elk
 
   logstash:
-    image: logstash
+    image: docker.elastic.co/logstash/logstash:${LOGSTASH_VERSION}
     configs:
       - source: logstash_config
         target: /etc/logstash/logstash.yml
       - source: logstash_pipeline_config
         target: /etc/logstash/conf.d/logstash.conf
-    command: ["-f", "/etc/logstash/conf.d/logstash.conf"]
-    environment:
-      LS_JAVA_OPTS: "-Xmx2048m -Xms256m"
     networks:
       - elk
+      - bridge
     depends_on:
       - elasticsearch
       
@@ -57,3 +53,4 @@ services:
       - bridge
     depends_on:
       - elasticsearch
+
