@@ -1,0 +1,46 @@
+version: '3.4'
+
+networks:
+  elk:
+    driver: overlay
+    attachable: true
+  bridge:
+    external:
+      name: bridge
+
+services:
+
+  elasticsearch:
+    image: elasticsearch
+    volumes:
+      - ./elasticsearch/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml:ro
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+
+  logstash:
+    image: logstash
+    volumes:
+      - ./logstash/logstash.yml:/etc/logstash/logstash.yml:ro
+      - ./logstash/conf.d/logstash.conf:/etc/logstash/conf.d:ro
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: kibana
+    environment:
+      - VIRTUAL_HOST=${TEAMCITY_SERVER_VIRTUAL_HOST}
+      - VIRTUAL_PORT=${TEAMCITY_SERVER_VIRTUAL_PORT}
+    volumes:
+      - ./kibana/kibana.yml:/etc/kibana/kibana.yml:ro
+    networks:
+      - elk
+      - bridge
+    depends_on:
+      - elasticsearch
+

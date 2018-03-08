@@ -1,12 +1,8 @@
 # ELK  Docker
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/scalified/elk.svg)](https://hub.docker.com/r/scalified/elk)
-[![](https://images.microbadger.com/badges/image/scalified/elk.svg)](https://microbadger.com/images/scalified/elk)
-[![](https://images.microbadger.com/badges/version/scalified/elk.svg)](https://microbadger.com/images/scalified/elk)
-
 ## Description
 
-This repository is used for building a [**Docker**](https://www.docker.com) image containing [**ELK Stack**](https://www.elastic.co/elk-stack)
+This repository is contains Docker Stack composition for [**ELK Stack**](https://www.elastic.co/elk-stack)
 
 ### ELK
 
@@ -19,20 +15,6 @@ ELK consists of three independent products:
 • **Kibana** used to visualize Elasticsearch data and navigate the Elastic Stack
 
 ![ELK Stack](images/elk_stack.png)
-
-## Dockerhub
-
-**`docker pull scalified/elk`**
-
-## Version
-
-| #      | Version |
-|--------|---------|
-| ELK    | 6.1.2   |
-
-## Volumes
-
-**`/var/lib/elasticsearch`**
 
 ## Ports
 
@@ -70,18 +52,6 @@ ELK consists of three independent products:
 	</handlers>
 </root-logger>
 ```
-
-#### Building Docker Image
-
-`docker build . -t <tag>`
-
-#### Running Docker Image
-
-* Pulling from **Dockerhub** and launching:  
-  `docker run -it scalified/elk /bin/bash`
-
-* Launching the built image with <tag> tag:  
-  `docker run -it <tag> /bin/sh`
 
 ## Scalified Links
 
