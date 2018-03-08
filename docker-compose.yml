@@ -20,7 +20,7 @@ configs:
 
 services:
   elasticsearch:
-    image: elasticsearch
+    image: elasticsearch:alpine
     configs:
       - source: elasticearch_config
         target: /etc/elasticsearch/elasticsearch.yml
@@ -30,7 +30,7 @@ services:
       - elk
 
   logstash:
-    image: logstash
+    image: logstash:alpine
     configs:
       - source: logstash_config
         target: /etc/logstash/logstash.yml
