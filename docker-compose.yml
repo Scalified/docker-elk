@@ -14,7 +14,7 @@ configs:
   logstash_config:
     file: ./logstash/logstash.yml
   logstash_pipeline_config:
-    file: ./logstash/conf.d/logstash.conf
+    file: ./logstash/pipeline/logstash.conf
   kibana_config:
     file: ./kibana/kibana.yml
 
@@ -35,7 +35,7 @@ services:
       - source: logstash_config
         target: /usr/share/logstash/config/logstash.yml
       - source: logstash_pipeline_config
-        target: /usr/share/logstash/pipeline
+        target: /usr/share/logstash/pipeline/logstash.conf
     networks:
       - elk
       - bridge
