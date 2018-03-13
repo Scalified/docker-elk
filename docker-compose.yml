@@ -20,15 +20,17 @@ configs:
 
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTICSEARCH_VERSION}
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.2
     configs:
       - source: elasticearch_config
         target: /etc/elasticsearch/elasticsearch.yml
     networks:
       - elk
+    environment:
+      ES_JAVA_OPTS: "-Xms256m -Xmx1024m"
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:${LOGSTASH_VERSION}
+    image: docker.elastic.co/logstash/logstash-oss:6.2.2
     configs:
       - source: logstash_config
         target: /etc/logstash/logstash.yml
@@ -39,9 +41,11 @@ services:
       - bridge
     depends_on:
       - elasticsearch
+    environment:
+      LS_JAVA_OPTS: "-Xms256m -Xmx1024m"
       
   kibana:
-    image: kibana
+    image: docker.elastic.co/kibana/kibana-oss:6.2.2
     environment:
       - VIRTUAL_HOST=${KIBANA_VIRTUAL_HOST}
       - VIRTUAL_PORT=${KIBANA_VIRTUAL_PORT}

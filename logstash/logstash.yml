@@ -1,3 +1,4 @@
 path.data: /var/lib/logstash
 path.logs: /var/log/logstash
 http.host: "0.0.0.0"
+path.config: /etc/logstash/conf.d/logstash.conf
