@@ -37,12 +37,12 @@ ELK consists of three independent products:
         <pattern-formatter pattern="%-5p %s%E%n"/>
     </formatter>
     <properties>
-        <property name="appName" value="apsbau"/>
+        <property name="appName" value="<application name>"/>
         <property name="facility" value="SYSLOGD"/>
-        <property name="serverHostname" value="swarm.swupp.com"/>
-        <property name="port" value="4560"/>
+        <property name="serverHostname" value="<logstash host>"/>
+        <property name="port" value="<logstash port>"/>
         <property name="protocol" value="TCP"/>
-        <property name="hostname" value="DEV"/>
+        <property name="hostname" value="<host name>"/>
         <property name="maxLength" value="32768"/>
         <property name="truncate" value="false"/>
         <property name="syslogType" value="RFC5424"/>
