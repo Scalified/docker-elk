@@ -32,26 +32,24 @@ ELK consists of three independent products:
 
 ```xml
 <custom-handler name="SYSLOG" class="org.jboss.logmanager.handlers.SyslogHandler" module="org.jboss.logmanager">
-	<formatter>
-		<pattern-formatter pattern="%-5p %s%E%n"/>
-	</formatter>
-	<properties>
-		<property name="appName" value="app"/>
-		<property name="facility" value="SYSLOGD"/>
-		<property name="serverHostname" value="elk"/>
-		<property name="port" value="4560"/>
-		<property name="protocol" value="TCP"/>
-		<property name="hostname" value="dev"/>
-		<property name="syslogType" value="RFC5424"/>
-	</properties>
+    <encoding value="UTF-8"/>
+    <formatter>
+        <pattern-formatter pattern="%-5p %s%E%n"/>
+    </formatter>
+    <properties>
+        <property name="appName" value="apsbau"/>
+        <property name="facility" value="SYSLOGD"/>
+        <property name="serverHostname" value="swarm.swupp.com"/>
+        <property name="port" value="4560"/>
+        <property name="protocol" value="TCP"/>
+        <property name="hostname" value="DEV"/>
+        <property name="maxLength" value="32768"/>
+        <property name="truncate" value="false"/>
+        <property name="syslogType" value="RFC5424"/>
+    </properties>
 </custom-handler>
-<root-logger>
-	<level name="INFO"/>
-	<handlers>
-		<handler name="SYSLOG"/>
-	</handlers>
-</root-logger>
 ```
+[Syslog Configuration Options](https://access.redhat.com/solutions/1276813)
 
 ## Scalified Links
 
