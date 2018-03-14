@@ -36,6 +36,8 @@ services:
         target: /usr/share/logstash/config/logstash.yml
       - source: logstash_pipeline_config
         target: /usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - 4560:4560
     networks:
       - elk
       - bridge
