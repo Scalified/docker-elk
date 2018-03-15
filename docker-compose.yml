@@ -7,6 +7,10 @@ networks:
   bridge:
     external:
       name: bridge
+      
+volumes:
+  elasticsearch_data:
+    driver: local
 
 configs:
   elasticearch_config:
@@ -25,7 +29,7 @@ services:
       - source: elasticearch_config
         target: /usr/share/elasticsearch/config/elasticsearch.yml
     volumes:
-      - ${ELASTICSEARCH_DATA}:/usr/share/elasticsearch/data
+      - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
       - elk
     environment:
