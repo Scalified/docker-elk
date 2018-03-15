@@ -24,6 +24,8 @@ services:
     configs:
       - source: elasticearch_config
         target: /usr/share/elasticsearch/config/elasticsearch.yml
+    volumes:
+      - ${ELASTICSEARCH_DATA}:/usr/share/elasticsearch/data
     networks:
       - elk
     environment:
