@@ -4,9 +4,9 @@ networks:
   elk:
     driver: overlay
     attachable: true
-  bridge:
+  shared:
     external:
-      name: bridge
+      name: shared
       
 volumes:
   elasticsearch_data:
@@ -32,6 +32,10 @@ services:
       - elasticsearch_data:/usr/share/elasticsearch/data
     networks:
       - elk
+    deploy:
+      placement:
+        constraints:
+          - node.labels.alias == ${NODE_ALIAS}
     environment:
       ES_JAVA_OPTS: "-Xms256m -Xmx1024m"
 
@@ -46,9 +50,13 @@ services:
       - 4560:4560
     networks:
       - elk
-      - bridge
+      - shared
     depends_on:
       - elasticsearch
+    deploy:
+      placement:
+        constraints:
+          - node.labels.alias == ${NODE_ALIAS}
     environment:
       LS_JAVA_OPTS: "-Xms256m -Xmx1024m"
       
@@ -62,7 +70,11 @@ services:
         target: /usr/share/kibana/config/kibana.yml
     networks:
       - elk
-      - bridge
+      - shared
+    deploy:
+      placement:
+        constraints:
+          - node.labels.alias == ${NODE_ALIAS}
     depends_on:
       - elasticsearch
 
