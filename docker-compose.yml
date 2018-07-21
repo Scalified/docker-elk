@@ -62,9 +62,6 @@ services:
       
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:6.2.2
-    environment:
-      - VIRTUAL_HOST=${KIBANA_VIRTUAL_HOST}
-      - VIRTUAL_PORT=${KIBANA_VIRTUAL_PORT}
     configs:
       - source: kibana_config
         target: /usr/share/kibana/config/kibana.yml
@@ -77,4 +74,3 @@ services:
           - node.labels.alias == ${NODE_ALIAS}
     depends_on:
       - elasticsearch
-
